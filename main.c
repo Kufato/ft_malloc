@@ -2,8 +2,8 @@
 
 int main(void)
 {
-    size_t  size = sizeof(char) * 5; 
-    char    *tab = malloc(size);
+    size_t	size = sizeof(int) * 5; 
+    int		*tab = malloc(size);
     if (tab == NULL)
     {
         perror("malloc");
@@ -11,10 +11,10 @@ int main(void)
     }
 
     for (int i = 0; i < 5; i++)
-        tab[i] = ft_itoa(i)[0];
+        tab[i] = i;
     
     for (int i = 0; i < 5; i++)
-        ft_putchar_fd(tab[i], 1);
+        printf("tab[%d] = %d\n", i, tab[i]);
     
     free(tab);
     return (0);

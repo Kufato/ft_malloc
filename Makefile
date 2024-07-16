@@ -29,7 +29,7 @@ LIBFT		= lib/libft
 ############### SOURCES ###############
 
 CC			= gcc
-CFLAGS		= -Wall -Werror -Wextra -g3
+CFLAGS		= -Wall -Werror -Wextra -g3 -fPIC
 
 SRCS		= $(wildcard $(SRC_DIR)/*.c)
 OBJS		= $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
@@ -52,7 +52,7 @@ $(OBJ_DIR):
 	@mkdir -p $(OBJ_DIR)
 
 clean:
-	@echo - Cleanning...
+	@echo - Cleaning...
 	@rm -rf $(OBJ_DIR)
 	@echo - Cleaning libft...
 	@$(MAKE) -s -C $(LIBFT) clean

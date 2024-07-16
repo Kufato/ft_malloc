@@ -16,7 +16,7 @@
 // ############### Includes ###############
 
 #include <stdio.h> // for the perror() function 
-
+#include <stdbool.h> // for the 'bool' type
 #include <sys/mman.h>
 #include "../lib/libft/libft.h"
 
@@ -40,24 +40,26 @@
 
 // ############### Structures ###############
 
-typedef struct  s_zone
-{
-	size_t			size;
-	size_t			nb_block;
-	struct s_zone	*next;
-	struct s_zone	*prev;
-}				t_zone;
+typedef struct	s_zone	t_zone;
+typedef struct	s_block	t_block;
 
-typedef struct	s_block
+struct	s_block
 {
-	bool			free;
-	size_t			size;
-	struct s_block	*next;
-}				t_block;
+	bool	free;
+	size_t	size;
+	t_block	*next;
+};
+
+struct  s_zone
+{
+	size_t	size;
+	t_zone	*next;
+	t_block	blocks;
+};
 
 // ############### Global variables ###############
 
-extern t_zone	*g_zones = NULL;
+extern t_zone	*g_zones;
 
 // ############### Functions ###############
 
