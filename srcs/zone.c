@@ -13,27 +13,27 @@
 #include "../inc/malloc.h"
 
 /**
- * @brief Create, initialize and add to the chained list a new zone object
+ * @brief Create, initialize and add to the chained list a new zone
  * 
- * @param zone chained list of all the zones
- * @param size size of zone to be allocated
+ * @param block_size the size of the block to be allocated
+ * @param zone_size the size of the zone to 
  * @param current a pointer to the first node of the chained list zones
  * @return t_zone* the new zone
  */
-t_zone *create_zone(t_zone **zone, size_t size)
+t_zone  *create_zone(size_t block_size, size_t zone_size)
 {
-    t_zone *current = *zone;
+    t_zone  *new_zone;
+    t_zone  *current = g_zones;
     
-    if (!zone)
-        return (NULL);
-    t_zone *new_zone = mmap(NULL, size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
+    new_zone = mmap(NULL, zone_size, PROT_READ | PROT_WRITE, MAP_ANONYMOUS | MAP_PRIVATE, -1, 0);
     if (new_zone == MAP_FAILED)
         return NULL;
 
     new_zone->next = NULL;
-    new_zone->blocks.size = size - ZONE_SIZE;
-    new_zone->blocks.free = true;
-    new_zone->blocks.next = NULL;
+    new_zone->size = zone_size;
+    new_zone->blocks->size = block_size;
+    new_zone->blocks->free = true;
+    new_zone->blocks->next = NULL;
 
     while (current && current->next)
         current = current->next;

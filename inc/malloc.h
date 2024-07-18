@@ -22,21 +22,20 @@
 
 // ############### Defines ###############
 
-#define ALIGN_64(x)				(((((x) - 1) >> 3) << 3) + 8)
+#define ALIGN_64(x)				((x + 7) & ~0x07)
+#define ALIGN_4096(x)			((x + 4095) & ~0xFFF)
 
 #define PAGE_SIZE				((size_t) getpagesize())
 #define	ZONE_SIZE				sizeof(t_zone)
 #define BLOCK_SIZE				sizeof(t_block)
 
 #define TINY_BLOCK_SIZE			((size_t) 128 + 16 - BLOCK_SIZE)
-#define USED_TINY_ZONE_SIZE		(100 * (TINY_BLOCK_SIZE + BLOCK_SIZE) + ZONE_SIZE)
-#define TINY_PADDING_SIZE		(USED_TINY_ZONE_SIZE % PAGE_SIZE)
-#define	TINY_ZONE_SIZE			(USED_TINY_ZONE_SIZE + PAGE_SIZE - TINY_PADDING_SIZE)
+#define TINY_ZONE_SIZE			(100 * (TINY_BLOCK_SIZE + BLOCK_SIZE) + ZONE_SIZE)
+#define ALIGN_TINY_ZONE_SIZE	ALIGN_4096(TINY_ZONE_SIZE + PAGE_SIZE)
 
 #define SMALL_BLOCK_SIZE		((size_t) 1024 + 16 - BLOCK_SIZE)
-#define USED_SMALL_ZONE_SIZE	(100 * (SMALL_BLOCK_SIZE + BLOCK_SIZE) + ZONE_SIZE)
-#define SMALL_PADDING_SIZE		(ZONE_SIZE - (USED_SMALL_ZONE_SIZE % ZONE_SIZE))
-#define SMALL_ZONE_SIZE			(USED_SMALL_ZONE_SIZE + SMALL_PADDING_SIZE)
+#define SMALL_ZONE_SIZE			(100 * (SMALL_BLOCK_SIZE + BLOCK_SIZE) + ZONE_SIZE)
+#define ALIGN_SMALL_ZONE_SIZE	ALIGN_4096(SMALL_ZONE_SIZE + PAGE_SIZE)
 
 // ############### Structures ###############
 
@@ -54,7 +53,7 @@ struct  s_zone
 {
 	size_t	size;
 	t_zone	*next;
-	t_block	blocks;
+	t_block	*blocks;
 };
 
 // ############### Global variables ###############

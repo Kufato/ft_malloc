@@ -12,7 +12,7 @@
 
 #include "../inc/malloc.h"
 
-void free(void *ptr)
+void  free(void *ptr)
 {
     size_t page_size = getpagesize();
     if (munmap(ptr, page_size) == -1)
