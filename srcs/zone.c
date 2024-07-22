@@ -31,9 +31,9 @@ t_zone  *create_zone(size_t block_size, size_t zone_size)
 
     new_zone->next = NULL;
     new_zone->size = zone_size;
-    new_zone->blocks->size = block_size;
-    new_zone->blocks->free = true;
     new_zone->blocks->next = NULL;
+    new_zone->blocks->free = true;
+    new_zone->blocks->size = block_size;
 
     while (current && current->next)
         current = current->next;

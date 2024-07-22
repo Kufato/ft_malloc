@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   malloc.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kufato <kufato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:37:41 by kufato            #+#    #+#             */
-/*   Updated: 2024/07/05 15:53:10 by kufato           ###   ########.fr       */
+/*   Updated: 2024/07/22 11:04:41 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,11 +62,17 @@ extern t_zone	*g_zones;
 
 // ############### Functions ###############
 
+//     * Mandatory *
 void    free(void *ptr);
 void    *malloc(size_t size);
 void    *realloc(void *ptr, size_t size);
 void    show_alloc_mem();
 
+//     * Blocks *
+void    *find_block(size_t block_size, size_t zone_size);
+
+
+//     * Zones *
 t_zone	*create_zone(t_zone **zone, size_t size);
 
 #endif
