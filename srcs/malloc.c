@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:54:43 by kufato            #+#    #+#             */
-/*   Updated: 2024/07/19 16:02:38 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/07/24 11:37:25 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  */
 void    pre_alloc()
 {
-	create_zone(TINY_BLOCK_SIZE, TINY_ZONE_SIZE);
-	create_zone(SMALL_BLOCK_SIZE, SMALL_ZONE_SIZE);
+	create_zone(NULL, TINY_ZONE_SIZE);
+	create_zone(NULL, SMALL_ZONE_SIZE);
 }
 
 /**

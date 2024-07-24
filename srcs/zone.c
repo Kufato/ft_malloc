@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   zone.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: kufato <kufato@student.42.fr>              +#+  +:+       +#+        */
+/*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:39:56 by kufato            #+#    #+#             */
-/*   Updated: 2024/07/02 14:34:27 by kufato           ###   ########.fr       */
+/*   Updated: 2024/07/23 14:45:20 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,10 +31,15 @@ t_zone  *create_zone(size_t block_size, size_t zone_size)
 
     new_zone->next = NULL;
     new_zone->size = zone_size;
-    new_zone->blocks->next = NULL;
-    new_zone->blocks->free = true;
-    new_zone->blocks->size = block_size;
-
+    if (block_size)
+    {
+        new_zone->blocks->next = NULL;
+        new_zone->blocks->free = true;
+        new_zone->blocks->size = block_size;
+    }
+    else
+        new_zone->blocks = NULL;
+    
     while (current && current->next)
         current = current->next;
     current->next = new_zone;
