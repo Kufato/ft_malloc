@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:54:39 by kufato            #+#    #+#             */
-/*   Updated: 2024/08/01 15:48:54 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/02 14:33:52 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,8 @@
 
 /**
  * @brief Free the memory space pointed by ptr.
+ * Update the size of the zone from which the block.
+ * If the zone is empty remove the zone frome he memory space.
  * 
  * @param ptr : the pointer to the memory space
  */

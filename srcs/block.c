@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:42:20 by axcallet          #+#    #+#             */
-/*   Updated: 2024/08/01 14:23:18 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:51:20 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,7 +81,7 @@ void    *find_block(size_t block_size, size_t zone_size)
 
     while (current && current->next)
 	{
-        if (current->size == zone_size)
+        if (current->max_size == zone_size)
 		{       
             t_block	*block = current->blocks;
             while (block && block->next)

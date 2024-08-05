@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:39:56 by kufato            #+#    #+#             */
-/*   Updated: 2024/08/01 16:33:08 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:51:04 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ t_zone  *create_zone(size_t block_size, size_t zone_size)
         return NULL;
     new_zone->next = NULL;
     new_zone->size = zone_size;
+    new_zone->max_size = zone_size;
     if (block_size)
     {
         new_zone->blocks->next = NULL;

@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:37:41 by kufato            #+#    #+#             */
-/*   Updated: 2024/08/01 14:31:38 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/05 15:46:42 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ struct	s_block
 struct  s_zone
 {
 	size_t	size;
+	size_t	max_size;
 	t_zone	*next;
 	t_block	*blocks;
 };
