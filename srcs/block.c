@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/19 15:42:20 by axcallet          #+#    #+#             */
-/*   Updated: 2024/08/05 15:51:20 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:12:06 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
  * @brief Create a block object.
  * 
  * @param block_size : the size of the requested block
- * @return t_block* 
+ * @return t_block* : the new block object
  */
 t_block	*create_block (size_t block_size)
 {
@@ -36,7 +36,7 @@ t_block	*create_block (size_t block_size)
  * 
  * @param zone : the zone of the research
  * @param block_size : the size of the requested block
- * @return t_block* 
+ * @return t_block* : the new block object
  */
 t_block *add_block(t_zone *zone, size_t block_size)
 {
@@ -73,9 +73,9 @@ t_block *add_block(t_zone *zone, size_t block_size)
  * 
  * @param zone_size : the size of a zone
  * @param block_size : the size of the block to be allocated
- * @return void* the pointer to the allocated block
+ * @return void* : the pointer to the allocated block
  */
-void    *find_block(size_t block_size, size_t zone_size)
+void    *find_block(size_t data_size, size_t block_size, size_t zone_size)
 {
     t_zone	*current = g_zones;
 
@@ -86,20 +86,20 @@ void    *find_block(size_t block_size, size_t zone_size)
             t_block	*block = current->blocks;
             while (block && block->next)
 			{
-                if (block->size >= block_size && block->free)
+                if (block->size >= data_size && block->free)
 				{
                     block->free = false;
                     return (void *)(block + 1);
                 }
                 block = block->next;
             }
-            t_block *new_block = add_block(current, block_size);
+            t_block *new_block = add_block(current, data_size);
 			if (!new_block)
 				break;
 			return (void *)(new_block);
         }
         current = current->next;
     }
-    t_zone  *new_zone = create_zone(block_size, zone_size);
+    t_zone  *new_zone = create_zone(data_size, block_size, zone_size);
     return (void *)(new_zone->blocks);
 }

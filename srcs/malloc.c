@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/17 16:54:43 by kufato            #+#    #+#             */
-/*   Updated: 2024/07/24 11:37:25 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:14:58 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,8 @@
  */
 void    pre_alloc()
 {
-	create_zone(NULL, TINY_ZONE_SIZE);
-	create_zone(NULL, SMALL_ZONE_SIZE);
+	create_zone(NULL, TINY_BLOCK_SIZE, TINY_ZONE_SIZE);
+	create_zone(NULL, SMALL_BLOCK_SIZE, SMALL_ZONE_SIZE);
 }
 
 /**
@@ -38,12 +38,12 @@ void    *malloc(size_t size)
 	if (!g_zones)
 		pre_alloc();
 	if (align_size <= TINY_BLOCK_SIZE)
-		block = find_block(align_size, TINY_ZONE_SIZE);
+		block = find_block(align_size, TINY_BLOCK_SIZE, TINY_ZONE_SIZE);
 	else if (align_size <= SMALL_BLOCK_SIZE)
-		block = find_block(align_size, SMALL_ZONE_SIZE);
+		block = find_block(align_size, SMALL_BLOCK_SIZE, SMALL_ZONE_SIZE);
 	else
     {
-        t_zone  *large_zone = create_zone(align_size, align_size);
+        t_zone  *large_zone = create_zone(align_size, align_size, align_size);
         return (large_zone->blocks);
     }
 	return (block);

@@ -6,7 +6,7 @@
 /*   By: axcallet <axcallet@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/02 10:39:56 by kufato            #+#    #+#             */
-/*   Updated: 2024/08/05 15:51:04 by axcallet         ###   ########.fr       */
+/*   Updated: 2024/08/07 15:16:00 by axcallet         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ t_zone	*search_zone_from_block(void *block)
  * @param current : a pointer to the first node of the chained list zones
  * @return t_zone* : the new zone
  */
-t_zone  *create_zone(size_t block_size, size_t zone_size)
+t_zone  *create_zone(size_t data_size, size_t block_size, size_t zone_size)
 {
     t_zone  *new_zone;
     t_zone  *current = g_zones;
@@ -91,11 +91,11 @@ t_zone  *create_zone(size_t block_size, size_t zone_size)
     new_zone->next = NULL;
     new_zone->size = zone_size;
     new_zone->max_size = zone_size;
-    if (block_size)
+    if (data_size)
     {
         new_zone->blocks->next = NULL;
         new_zone->blocks->free = true;
-        new_zone->blocks->size = block_size;
+        new_zone->blocks->size = data_size;
     }
     else
         new_zone->blocks = NULL;
